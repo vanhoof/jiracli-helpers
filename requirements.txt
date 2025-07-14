@@ -1,0 +1,10 @@
+# No external dependencies required for the current script
+# All dependencies are from Python standard library:
+# - sys
+# - subprocess
+# - calendar
+# - datetime
+# - json
+# - os
+# - shutil
+# - typing (Python 3.7+)
