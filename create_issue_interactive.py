@@ -351,7 +351,7 @@ def get_description_for_issue_type(issue_type: str, summary: str) -> str:
         
         options = [
             "Use default Epic template",
-            "Provide custom description", 
+            "Provide custom description",
             "No description"
         ]
         
@@ -359,7 +359,9 @@ def get_description_for_issue_type(issue_type: str, summary: str) -> str:
         
         if choice == "Use default Epic template":
             template = get_epic_description_template()
-            print_info("Using default Epic template. You can edit this after the issue is created.")
+            print_info(
+                "Using default Epic template. You can edit this after the issue is created."
+            )
             return template
         elif choice == "Provide custom description":
             print_info("Enter your custom description:")
