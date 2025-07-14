@@ -205,7 +205,7 @@ class TestEpicTemplate:
         assert "Any additional details" in template
 
         # Check that bullet points are present
-        assert " * " in template
+        assert "* " in template
 
         # Check template structure
         lines = template.split("\n")
