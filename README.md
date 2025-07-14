@@ -118,7 +118,12 @@ Any additional details, questions or decisions that need to be made/addressed
    mypy .
    ```
 
-3. Run tests:
+3. Run security checks (optional):
+   ```bash
+   make security
+   ```
+
+4. Run tests:
    ```bash
    pytest
    ```
@@ -129,6 +134,8 @@ This project uses:
 - **flake8** for linting
 - **mypy** for type checking
 - **pytest** for testing
+- **safety** for dependency vulnerability scanning
+- **bandit** for security issue detection (optional)
 
 Run all quality checks:
 ```bash

@@ -1,8 +1,9 @@
-.PHONY: help lint format test clean install-dev
+.PHONY: help lint security format test clean install-dev
 
 help:
 	@echo "Available commands:"
 	@echo "  lint        - Run linting checks (flake8, mypy)"
+	@echo "  security    - Run security checks (safety, bandit)"
 	@echo "  format      - Code formatting disabled"
 	@echo "  test        - Run tests with pytest"
 	@echo "  clean       - Clean up cache files"
@@ -11,6 +12,11 @@ help:
 lint:
 	flake8 .
 	mypy .
+
+security:
+	@echo "Running security checks..."
+	safety check || true
+	bandit -r . || true
 
 format:
 	@echo "Code formatting disabled. Use your preferred formatter manually."

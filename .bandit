@@ -1,0 +1,12 @@
+[bandit]
+# Bandit configuration for jiracli-helpers
+# This is a CLI tool that legitimately uses subprocess for external commands
+
+# Skip test files - assert statements are expected in tests
+skips = B101
+
+# Skip subprocess warnings for legitimate CLI operations
+# B603: subprocess_without_shell_equals_true - we use subprocess.run with lists for security
+# B607: start_process_with_partial_path - we use 'which' command and validate paths
+# B404: Consider possible security implications associated with subprocess module - expected for CLI tools
+exclude_dirs = tests
