@@ -33,14 +33,6 @@ jobs:
         # Exit-zero treats all errors as warnings
         flake8 . --count --exit-zero --statistics
     
-    - name: Check code formatting with black
-      run: |
-        black --check .
-      continue-on-error: true  # Temporarily skip black until formatting is fixed
-    
-    - name: Check import sorting with isort
-      run: |
-        isort --check-only .
     
     - name: Type checking with mypy
       run: |

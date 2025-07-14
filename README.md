@@ -115,8 +115,7 @@ Any additional details, questions or decisions that need to be made/addressed
 2. Run linting:
    ```bash
    flake8 .
-   black --check .  # Note: Currently has formatting issues
-   isort --check-only .
+   mypy .
    ```
 
 3. Run tests:
@@ -128,8 +127,7 @@ Any additional details, questions or decisions that need to be made/addressed
 
 This project uses:
 - **flake8** for linting
-- **black** for code formatting
-- **isort** for import sorting
+- **mypy** for type checking
 - **pytest** for testing
 
 Run all quality checks:

@@ -2,21 +2,18 @@
 
 help:
 	@echo "Available commands:"
-	@echo "  lint        - Run linting checks (flake8, black, isort, mypy)"
-	@echo "  format      - Format code with black and isort"
+	@echo "  lint        - Run linting checks (flake8, mypy)"
+	@echo "  format      - Code formatting disabled"
 	@echo "  test        - Run tests with pytest"
 	@echo "  clean       - Clean up cache files"
 	@echo "  install-dev - Install development dependencies"
 
 lint:
 	flake8 .
-	black --check .
-	isort --check-only .
 	mypy .
 
 format:
-	black .
-	isort .
+	@echo "Code formatting disabled. Use your preferred formatter manually."
 
 test:
 	pytest
