@@ -28,6 +28,8 @@ from create_issue_interactive import (
     load_jcli_path,
     get_config_dir,
     get_jcli_path_file,
+    get_epic_description_template,
+    get_description_for_issue_type,
 )
 
 
@@ -184,6 +186,96 @@ class TestConfigManagement:
         with patch('create_issue_interactive.get_jcli_path_file', return_value="/nonexistent/file"):
             result = load_jcli_path()
             assert result is None
+
+
+class TestEpicTemplate:
+    """Test Epic template functionality"""
+    
+    def test_get_epic_description_template(self):
+        """Test getting Epic description template"""
+        template = get_epic_description_template()
+        
+        # Check that template contains expected sections
+        assert "### Goal:" in template
+        assert "### Acceptance Criteria:" in template
+        assert "### Open questions:" in template
+        assert "Any additional details" in template
+        
+        # Check that bullet points are present
+        assert "*" in template
+        
+        # Check template structure
+        lines = template.split('\n')
+        assert len(lines) >= 8  # Should have multiple lines
+    
+    @patch('create_issue_interactive.select_from_list')
+    @patch('create_issue_interactive.print_header')
+    @patch('create_issue_interactive.print_info')
+    def test_get_description_for_issue_type_epic_template(self, mock_print_info, mock_print_header, mock_select):
+        """Test getting description for Epic with template option"""
+        mock_select.return_value = "Use default Epic template"
+        
+        result = get_description_for_issue_type("Epic", "Test Epic")
+        
+        # Should return the template
+        assert "### Goal:" in result
+        assert "### Acceptance Criteria:" in result
+        assert "### Open questions:" in result
+        
+        # Check that appropriate functions were called
+        mock_print_header.assert_called_once_with("EPIC DESCRIPTION")
+        assert mock_print_info.call_count >= 3
+        mock_select.assert_called_once()
+    
+    @patch('create_issue_interactive.select_from_list')
+    @patch('create_issue_interactive.get_user_input')
+    @patch('create_issue_interactive.print_header')
+    @patch('create_issue_interactive.print_info')
+    def test_get_description_for_issue_type_epic_custom(self, mock_print_info, mock_print_header, mock_input, mock_select):
+        """Test getting description for Epic with custom option"""
+        mock_select.return_value = "Provide custom description"
+        mock_input.return_value = "Custom epic description"
+        
+        result = get_description_for_issue_type("Epic", "Test Epic")
+        
+        # Should return custom description
+        assert result == "Custom epic description"
+        
+        # Check that appropriate functions were called
+        mock_print_header.assert_called_once_with("EPIC DESCRIPTION")
+        mock_select.assert_called_once()
+        mock_input.assert_called_once()
+    
+    @patch('create_issue_interactive.select_from_list')
+    @patch('create_issue_interactive.print_header')
+    @patch('create_issue_interactive.print_info')
+    def test_get_description_for_issue_type_epic_no_description(self, mock_print_info, mock_print_header, mock_select):
+        """Test getting description for Epic with no description option"""
+        mock_select.return_value = "No description"
+        
+        result = get_description_for_issue_type("Epic", "Test Epic")
+        
+        # Should return empty string
+        assert result == ""
+        
+        # Check that appropriate functions were called
+        mock_print_header.assert_called_once_with("EPIC DESCRIPTION")
+        mock_select.assert_called_once()
+    
+    @patch('create_issue_interactive.get_user_input')
+    @patch('create_issue_interactive.print_header')
+    def test_get_description_for_issue_type_task(self, mock_print_header, mock_input):
+        """Test getting description for non-Epic issue type"""
+        mock_input.return_value = "Task description"
+        
+        result = get_description_for_issue_type("Task", "Test Task")
+        
+        # Should return the input description
+        assert result == "Task description"
+        
+        # Check that appropriate functions were called
+        mock_print_header.assert_called_once_with("ISSUE DESCRIPTION")
+        mock_input.assert_called_once_with("Enter issue description (optional)", "")
 
 
 if __name__ == "__main__":

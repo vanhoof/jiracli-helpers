@@ -326,6 +326,52 @@ def get_priority_options(project: str) -> List[str]:
     return ["Blocker", "Critical", "Major", "Normal", "Minor"]
 
 
+def get_epic_description_template() -> str:
+    """Get default Epic description template"""
+    return """### Goal:
+*
+
+### Acceptance Criteria:
+*
+
+### Open questions:
+Any additional details, questions or decisions that need to be made/addressed
+*"""
+
+
+def get_description_for_issue_type(issue_type: str, summary: str) -> str:
+    """Get description for issue, handling templates for specific issue types"""
+    if issue_type == "Epic":
+        print_header("EPIC DESCRIPTION")
+        print_info("Epic issues can use a structured template to help organize information.")
+        print_info("You can choose to:")
+        print_info("1. Use the default Epic template (recommended)")
+        print_info("2. Provide your own custom description")
+        print_info("3. Use no description")
+        
+        options = [
+            "Use default Epic template",
+            "Provide custom description", 
+            "No description"
+        ]
+        
+        choice = select_from_list(options, "Choose description option:", 0)
+        
+        if choice == "Use default Epic template":
+            template = get_epic_description_template()
+            print_info("Using default Epic template. You can edit this after the issue is created.")
+            return template
+        elif choice == "Provide custom description":
+            print_info("Enter your custom description:")
+            return get_user_input("Enter issue description (optional)", "")
+        else:
+            return ""
+    else:
+        # For non-Epic issues, use the original flow
+        print_header("ISSUE DESCRIPTION")
+        return get_user_input("Enter issue description (optional)", "")
+
+
 def get_available_projects(jcli_cmd: str) -> List[str]:
     """Get list of available projects - fallback to common defaults if jcli unavailable"""
     try:
@@ -503,9 +549,8 @@ def main():
         print_error("Summary is required!")
         summary = get_user_input("Enter issue summary")
     
-    # Get description
-    print_header("ISSUE DESCRIPTION")
-    description = get_user_input("Enter issue description (optional)", "")
+    # Get description (with special handling for Epic issues)
+    description = get_description_for_issue_type(issue_type, summary)
     
     # Get Epic Name if issue type is Epic
     epic_name = None
