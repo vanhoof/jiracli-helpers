@@ -328,15 +328,15 @@ def get_priority_options(project: str) -> List[str]:
 
 def get_epic_description_template() -> str:
     """Get default Epic description template"""
-    return """### Goal:
-*
+    return """h3. Goal:
+ * 
 
-### Acceptance Criteria:
-*
+h3. Acceptance Criteria:
+ * 
 
-### Open questions:
+h3. Open questions:
 Any additional details, questions or decisions that need to be made/addressed
-*"""
+ * """
 
 
 def get_description_for_issue_type(issue_type: str, summary: str) -> str:

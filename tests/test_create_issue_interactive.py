@@ -199,13 +199,13 @@ class TestEpicTemplate:
         template = get_epic_description_template()
 
         # Check that template contains expected sections
-        assert "### Goal:" in template
-        assert "### Acceptance Criteria:" in template
-        assert "### Open questions:" in template
+        assert "h3. Goal:" in template
+        assert "h3. Acceptance Criteria:" in template
+        assert "h3. Open questions:" in template
         assert "Any additional details" in template
 
         # Check that bullet points are present
-        assert "*" in template
+        assert " * " in template
 
         # Check template structure
         lines = template.split("\n")
@@ -223,9 +223,9 @@ class TestEpicTemplate:
         result = get_description_for_issue_type("Epic", "Test Epic")
 
         # Should return the template
-        assert "### Goal:" in result
-        assert "### Acceptance Criteria:" in result
-        assert "### Open questions:" in result
+        assert "h3. Goal:" in result
+        assert "h3. Acceptance Criteria:" in result
+        assert "h3. Open questions:" in result
 
         # Check that appropriate functions were called
         mock_print_header.assert_called_once_with("EPIC DESCRIPTION")

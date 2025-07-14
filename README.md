@@ -77,15 +77,15 @@ When creating Epic issues, you can choose from three options:
 
 The default template includes:
 ```
-### Goal:
-*
+h3. Goal:
+ * 
 
-### Acceptance Criteria:
-*
+h3. Acceptance Criteria:
+ * 
 
-### Open questions:
+h3. Open questions:
 Any additional details, questions or decisions that need to be made/addressed
-*
+ * 
 ```
 
 ## Installation
