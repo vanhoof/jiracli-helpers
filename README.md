@@ -24,7 +24,7 @@ This repository contains interactive Python scripts that wrap the `jcli` command
    password: your-api-token  # Use API token, not password
    ```
 
-3. **Python 3.7+** - Required for all scripts
+3. **Python 3.8+** - Required for all scripts
 
 ### Verify Installation
 
@@ -46,6 +46,7 @@ An interactive JIRA issue creation tool that guides users through the process wi
 - Project discovery with fallback mechanisms
 - Interactive calendar-based date selection
 - Support for Epic issues with Epic Name field
+- Epic description templates with customizable options
 - Priority selection with standard JIRA priorities
 - Colored terminal output for better UX
 - Input validation and error handling
@@ -63,9 +64,29 @@ python create_issue_interactive.py
 1. Script detects and tests jcli installation
 2. Fetches available projects from your JIRA instance
 3. Interactive selection of project, issue type, and priority
-4. Calendar-based due date selection
-5. Confirmation before issue creation
-6. Automatic issue creation via jcli
+4. For Epic issues: Choose between default template, custom description, or no description
+5. Calendar-based due date selection
+6. Confirmation before issue creation
+7. Automatic issue creation via jcli
+
+**Epic Template Feature:**
+When creating Epic issues, you can choose from three options:
+- **Use default Epic template**: Pre-structured template with Goal, Acceptance Criteria, and Open Questions sections
+- **Provide custom description**: Enter your own description text
+- **No description**: Leave the description field empty
+
+The default template includes:
+```
+### Goal:
+*
+
+### Acceptance Criteria:
+*
+
+### Open questions:
+Any additional details, questions or decisions that need to be made/addressed
+*
+```
 
 ## Installation
 
