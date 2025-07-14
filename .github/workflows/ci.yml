@@ -29,19 +29,19 @@ jobs:
     - name: Lint with flake8
       run: |
         # Stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 src tests --count --select=E9,F63,F7,F82 --show-source --statistics
         # Exit-zero treats all errors as warnings
-        flake8 . --count --exit-zero --statistics
+        flake8 src tests --count --exit-zero --statistics
     
     
     - name: Type checking with mypy
       run: |
-        mypy .
+        mypy src
       continue-on-error: true  # Don't fail CI on mypy errors initially
     
     - name: Test with pytest
       run: |
-        pytest --cov=. --cov-report=xml
+        pytest --cov=src --cov-report=xml
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3

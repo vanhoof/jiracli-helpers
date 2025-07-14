@@ -53,7 +53,7 @@ An interactive JIRA issue creation tool that guides users through the process wi
 
 **Usage:**
 ```bash
-python create_issue_interactive.py
+python src/create_issue_interactive.py
 ```
 
 **Options:**
@@ -114,8 +114,8 @@ Any additional details, questions or decisions that need to be made/addressed
 
 2. Run linting:
    ```bash
-   flake8 .
-   mypy .
+   flake8 src tests
+   mypy src
    ```
 
 3. Run security checks (optional):

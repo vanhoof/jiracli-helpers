@@ -10,3 +10,6 @@ skips = B101
 # B607: start_process_with_partial_path - we use 'which' command and validate paths
 # B404: Consider possible security implications associated with subprocess module - expected for CLI tools
 exclude_dirs = tests
+
+# Scan src directory
+targets = src

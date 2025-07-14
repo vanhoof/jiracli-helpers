@@ -10,13 +10,13 @@ help:
 	@echo "  install-dev - Install development dependencies"
 
 lint:
-	flake8 .
-	mypy .
+	flake8 src tests
+	mypy src
 
 security:
 	@echo "Running security checks..."
 	safety check || true
-	bandit -r . || true
+	bandit -r src || true
 
 format:
 	@echo "Code formatting disabled. Use your preferred formatter manually."

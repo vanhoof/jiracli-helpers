@@ -14,7 +14,7 @@ import pytest
 # Import the module under test
 import sys
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
 from create_issue_interactive import (
     Colors,
     extract_project_key,
