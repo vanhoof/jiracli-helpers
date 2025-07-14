@@ -19,15 +19,15 @@ from typing import List, Optional
 
 class Colors:
     """ANSI color codes for terminal output"""
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+    HEADER = "\033[95m"
+    OKBLUE = "\033[94m"
+    OKCYAN = "\033[96m"
+    OKGREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
 
 
 def print_header(text: str):
@@ -67,7 +67,7 @@ def get_jcli_path_file() -> str:
 def save_jcli_path(jcli_path: str) -> None:
     """Save the jcli path to persistent storage"""
     try:
-        with open(get_jcli_path_file(), 'w') as f:
+        with open(get_jcli_path_file(), "w") as f:
             f.write(jcli_path)
         print_success(f"Saved jcli path to {get_jcli_path_file()}")
     except Exception as e:
@@ -79,7 +79,7 @@ def load_jcli_path() -> Optional[str]:
     try:
         path_file = get_jcli_path_file()
         if os.path.exists(path_file):
-            with open(path_file, 'r') as f:
+            with open(path_file, "r") as f:
                 saved_path = f.read().strip()
                 if saved_path and os.path.exists(saved_path) and os.access(saved_path, os.X_OK):
                     return saved_path
@@ -96,7 +96,7 @@ def load_jcli_path() -> Optional[str]:
 def test_jcli_command(jcli_path: str) -> bool:
     """Test if a jcli command is working"""
     try:
-        result = subprocess.run([jcli_path, '--version'], capture_output=True, text=True, timeout=5)
+        result = subprocess.run([jcli_path, "--version"], capture_output=True, text=True, timeout=5)
         return result.returncode == 0
     except:
         return False
@@ -170,21 +170,21 @@ def display_calendar() -> str:
         
         user_input = input("\nEnter command or date: ").strip().lower()
         
-        if user_input == 'n':
+        if user_input == "n":
             if current_month == 12:
                 current_month = 1
                 current_year += 1
             else:
                 current_month += 1
-        elif user_input == 'p':
+        elif user_input == "p":
             if current_month == 1:
                 current_month = 12
                 current_year -= 1
             else:
                 current_month -= 1
-        elif user_input == 't':
+        elif user_input == "t":
             return today.strftime("%Y-%m-%d")
-        elif user_input == '':
+        elif user_input == "":
             return ""  # No due date
         else:
             # Try to parse as date
@@ -234,7 +234,7 @@ def find_jcli_command() -> str:
     ]
     
     # Add virtual environment paths
-    if 'VIRTUAL_ENV' in os.environ:
+    if "VIRTUAL_ENV" in os.environ:
         venv_path = os.path.join(os.environ['VIRTUAL_ENV'], 'bin', 'jcli')
         common_locations.insert(0, venv_path)
     
@@ -262,7 +262,7 @@ def find_jcli_command() -> str:
             print_success(f"Using jcli at: {selected_path}")
         else:
             # If we're in a virtual environment, prefer the venv version
-            if 'VIRTUAL_ENV' in os.environ:
+            if "VIRTUAL_ENV" in os.environ:
                 venv_path = os.environ['VIRTUAL_ENV']
                 for location in working_locations:
                     if location.startswith(venv_path):
