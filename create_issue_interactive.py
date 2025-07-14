@@ -93,8 +93,8 @@ def load_jcli_path() -> Optional[str]:
         return None
 
 
-def test_jcli_command(jcli_path: str) -> bool:
-    """Test if a jcli command is working"""
+def check_jcli_command(jcli_path: str) -> bool:
+    """Check if a jcli command is working"""
     try:
         result = subprocess.run([jcli_path, "--version"], capture_output=True, text=True, timeout=5)
         return result.returncode == 0
@@ -220,7 +220,7 @@ def find_jcli_command() -> str:
     saved_path = load_jcli_path()
     if saved_path:
         print_info(f"Found saved jcli path: {saved_path}")
-        if test_jcli_command(saved_path):
+        if check_jcli_command(saved_path):
             print_success(f"Using saved jcli at: {saved_path}")
             return saved_path
         else:
@@ -251,7 +251,7 @@ def find_jcli_command() -> str:
     # Test each location
     working_locations = []
     for location in common_locations:
-        if test_jcli_command(location):
+        if check_jcli_command(location):
             working_locations.append(location)
             print_success(f"Found working jcli at: {location}")
     
@@ -304,7 +304,7 @@ def find_jcli_command() -> str:
             continue
             
         # Test if it's actually jcli
-        if test_jcli_command(custom_path):
+        if check_jcli_command(custom_path):
             print_success(f"Valid jcli found at: {custom_path}")
             # Save the manually entered path
             save_jcli_path(custom_path)

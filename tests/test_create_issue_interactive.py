@@ -23,7 +23,7 @@ from create_issue_interactive import (
     print_success,
     print_error,
     print_info,
-    test_jcli_command,
+    check_jcli_command,
     get_user_input,
     save_jcli_path,
     load_jcli_path,
@@ -97,27 +97,27 @@ class TestJcliCommand:
     """Test jcli command related functions"""
 
     @patch("subprocess.run")
-    def test_test_jcli_command_success(self, mock_run):
-        """Test successful jcli command test"""
+    def test_check_jcli_command_success(self, mock_run):
+        """Test successful jcli command check"""
         mock_run.return_value = MagicMock(returncode=0)
-        result = test_jcli_command("/usr/bin/jcli")
+        result = check_jcli_command("/usr/bin/jcli")
         assert result is True
         mock_run.assert_called_once_with(
             ["/usr/bin/jcli", "--version"], capture_output=True, text=True, timeout=5
         )
 
     @patch("subprocess.run")
-    def test_test_jcli_command_failure(self, mock_run):
-        """Test failed jcli command test"""
+    def test_check_jcli_command_failure(self, mock_run):
+        """Test failed jcli command check"""
         mock_run.return_value = MagicMock(returncode=1)
-        result = test_jcli_command("/usr/bin/jcli")
+        result = check_jcli_command("/usr/bin/jcli")
         assert result is False
 
     @patch("subprocess.run")
-    def test_test_jcli_command_exception(self, mock_run):
-        """Test jcli command test with exception"""
+    def test_check_jcli_command_exception(self, mock_run):
+        """Test jcli command check with exception"""
         mock_run.side_effect = Exception("Command failed")
-        result = test_jcli_command("/usr/bin/jcli")
+        result = check_jcli_command("/usr/bin/jcli")
         assert result is False
 
 
