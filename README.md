@@ -78,14 +78,14 @@ When creating Epic issues, you can choose from three options:
 The default template includes:
 ```
 h3. Goal:
-* 
+* _Add your goal here_
 
 h3. Acceptance Criteria:
-* 
+* _Add your acceptance criteria here_
 
 h3. Open questions:
 Any additional details, questions or decisions that need to be made/addressed
-* 
+* _Add your questions here_
 ```
 
 ## Installation
