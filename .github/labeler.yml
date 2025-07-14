@@ -1,0 +1,26 @@
+# Automatically label PRs based on file changes
+
+"documentation":
+  - "*.md"
+  - "docs/**/*"
+
+"tests":
+  - "tests/**/*"
+  - "**/*test*.py"
+
+"ci":
+  - ".github/**/*"
+  - ".github/workflows/*"
+  - "Makefile"
+  - "requirements*.txt"
+  - "setup.cfg"
+  - "pyproject.toml"
+
+"scripts":
+  - "*.py"
+  - "!tests/**/*"
+
+"dependencies":
+  - "requirements*.txt"
+  - "setup.cfg"
+  - "pyproject.toml"
