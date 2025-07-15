@@ -3,10 +3,8 @@ name: Build Desktop Apps
 on:
   push:
     branches: [ main, experimental-frontend ]
-    paths: [ 'frontend/**' ]
   pull_request:
     branches: [ main, experimental-frontend ]
-    paths: [ 'frontend/**' ]
   release:
     types: [ published ]
 
