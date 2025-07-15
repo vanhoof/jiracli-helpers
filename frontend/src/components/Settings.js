@@ -173,7 +173,7 @@ function Settings({ systemStatus, onStatusChange }) {
                 />
               </Paper>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <Paper elevation={1} sx={{ p: 2 }}>
                 <Typography variant="subtitle2" gutterBottom>JIRA Configuration</Typography>
                 <Chip
