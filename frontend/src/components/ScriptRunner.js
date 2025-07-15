@@ -147,6 +147,7 @@ function ScriptRunner({ systemStatus }) {
     setShowTerminal(false);
     setSelectedScript(null);
     setOutput('');
+    setIsRunning(false); // Reset running state when closing terminal
   };
 
   const isSystemReady = () => {
