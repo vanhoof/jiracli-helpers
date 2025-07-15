@@ -54,7 +54,7 @@ def print_info(text: str):
 
 def get_config_dir() -> str:
     """Get the configuration directory for storing jcli path"""
-    config_dir = os.path.expanduser("~/.local/share/jcli-interactive")
+    config_dir = os.path.expanduser("~/.local/share/jiracli-helpers")
     os.makedirs(config_dir, exist_ok=True)
     return config_dir
 
