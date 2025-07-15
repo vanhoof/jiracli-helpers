@@ -5,6 +5,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('electronAPI', {
   // System checks
   checkPython: () => ipcRenderer.invoke('check-python'),
+  checkGit: () => ipcRenderer.invoke('check-git'),
   checkJiracli: () => ipcRenderer.invoke('check-jiracli'),
   
   // jiracli installation

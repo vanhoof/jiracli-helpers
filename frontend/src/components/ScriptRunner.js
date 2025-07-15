@@ -150,9 +150,10 @@ function ScriptRunner({ systemStatus }) {
   };
 
   const isSystemReady = () => {
-    return systemStatus.python?.available && 
-           systemStatus.jiracli?.available && 
-           systemStatus.jiraConfig?.exists;
+    return (systemStatus.python?.available || false) && 
+           (systemStatus.git?.available || false) &&
+           (systemStatus.jiracli?.available || false) && 
+           (systemStatus.jiraConfig?.exists || false);
   };
 
   if (!isSystemReady()) {

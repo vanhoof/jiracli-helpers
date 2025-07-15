@@ -205,6 +205,7 @@ function App() {
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
   const [systemStatus, setSystemStatus] = useState({
     python: null,
+    git: null,
     jiracli: null,
     jiraConfig: null
   });
@@ -215,20 +216,23 @@ function App() {
 
   const checkSystemStatus = async () => {
     try {
-      const [pythonCheck, jiracliCheck, jiraConfig] = await Promise.all([
+      const [pythonCheck, gitCheck, jiracliCheck, jiraConfig] = await Promise.all([
         window.electronAPI.checkPython(),
+        window.electronAPI.checkGit(),
         window.electronAPI.checkJiracli(),
         window.electronAPI.getJiraConfig()
       ]);
 
       setSystemStatus({
         python: pythonCheck,
+        git: gitCheck,
         jiracli: jiracliCheck,
         jiraConfig: jiraConfig
       });
 
       // Consider setup complete if all components are available OR manually completed
       const systemSetupComplete = pythonCheck.available && 
+        gitCheck.available &&
         jiracliCheck.available && 
         jiraConfig.exists;
       

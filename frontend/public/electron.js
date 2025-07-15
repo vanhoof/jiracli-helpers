@@ -107,6 +107,18 @@ ipcMain.handle('check-python', async () => {
   });
 });
 
+ipcMain.handle('check-git', async () => {
+  return new Promise((resolve) => {
+    exec('git --version', (error, stdout, stderr) => {
+      resolve({
+        available: !error,
+        version: error ? null : stdout.trim(),
+        command: 'git'
+      });
+    });
+  });
+});
+
 ipcMain.handle('check-jiracli', async () => {
   // Check multiple possible locations for jcli
   const possiblePaths = [

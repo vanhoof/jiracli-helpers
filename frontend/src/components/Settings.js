@@ -153,6 +153,17 @@ function Settings({ systemStatus, onStatusChange }) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Paper elevation={1} sx={{ p: 2 }}>
+                <Typography variant="subtitle2" gutterBottom>Git</Typography>
+                <Chip
+                  label={systemStatus.git?.available ? 
+                    `✓ ${systemStatus.git.version}` : '✗ Not Found'}
+                  color={getStatusColor(systemStatus.git)}
+                  variant="outlined"
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper elevation={1} sx={{ p: 2 }}>
                 <Typography variant="subtitle2" gutterBottom>jiracli</Typography>
                 <Chip
                   label={systemStatus.jiracli?.available ? 

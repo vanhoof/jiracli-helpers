@@ -28,7 +28,7 @@ const steps = ['Check System', 'Install Dependencies', 'Configure JIRA'];
 
 function StatusChip({ status, label }) {
   const getStatusProps = () => {
-    if (status === null) return { color: 'default', icon: null };
+    if (!status) return { color: 'default', icon: null };
     if (status.available || status.exists || status.success) {
       return { color: 'success', icon: <CheckCircle /> };
     }
@@ -126,11 +126,11 @@ ${useToken ? `token: ${jiraConfig.token}` : `password: ${jiraConfig.password}`}`
   const isStepComplete = (step) => {
     switch (step) {
       case 0:
-        return systemStatus.python?.available;
+        return (systemStatus.python?.available || false) && (systemStatus.git?.available || false);
       case 1:
-        return systemStatus.jiracli?.available || installComplete;
+        return (systemStatus.jiracli?.available || false) || installComplete;
       case 2:
-        return systemStatus.jiraConfig?.exists;
+        return systemStatus.jiraConfig?.exists || false;
       default:
         return false;
     }
@@ -158,6 +158,10 @@ ${useToken ? `token: ${jiraConfig.token}` : `password: ${jiraConfig.password}`}`
                 label={`Python ${systemStatus.python?.version || 'Not Found'}`} 
               />
               <StatusChip 
+                status={systemStatus.git} 
+                label={`Git ${systemStatus.git?.version || 'Not Found'}`} 
+              />
+              <StatusChip 
                 status={systemStatus.jiracli} 
                 label={`jiracli ${systemStatus.jiracli?.version || 'Not Found'}`} 
               />
@@ -170,6 +174,12 @@ ${useToken ? `token: ${jiraConfig.token}` : `password: ${jiraConfig.password}`}`
             {!systemStatus.python?.available && (
               <Alert severity="error" sx={{ mt: 2 }}>
                 Python is required but not found. Please install Python 3.7+ and restart the application.
+              </Alert>
+            )}
+
+            {!systemStatus.git?.available && (
+              <Alert severity="error" sx={{ mt: 2 }}>
+                Git is required but not found. Please install Git and restart the application.
               </Alert>
             )}
 
