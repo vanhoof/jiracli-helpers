@@ -1,0 +1,184 @@
+/* Dark Theme Application Styles */
+body {
+  background-color: #1E1E1E;
+  color: #D4D4D4;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  background-color: #1E1E1E;
+  min-height: 100vh;
+}
+
+/* Scrollbar Styling for Dark Theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2D2D2D;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #505050;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #606060;
+}
+
+/* Terminal Output Styling */
+.terminal-output {
+  background-color: #1e1e1e;
+  color: #D4D4D4;
+  font-family: 'Courier New', monospace;
+  padding: 16px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  max-height: 400px;
+  min-height: 200px;
+  border: 1px solid #404040;
+}
+
+.terminal-output::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+  background: #1E1E1E;
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+  background: #404040;
+  border-radius: 3px;
+}
+
+.terminal-input {
+  background-color: #2d2d2d;
+  color: #D4D4D4;
+  border: none;
+  outline: none;
+  font-family: 'Courier New', monospace;
+  width: 100%;
+  padding: 8px;
+}
+
+/* Script Card Hover Effects */
+.script-card {
+  transition: all 0.3s ease-in-out !important;
+  cursor: pointer;
+}
+
+.script-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Status Indicators */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-success {
+  color: #0DBC79;
+}
+
+.status-error {
+  color: #F14C4C;
+}
+
+.status-warning {
+  color: #F5F543;
+}
+
+.status-info {
+  color: #29B8DB;
+}
+
+/* Enhanced Focus States */
+.MuiButton-root:focus {
+  outline: 2px solid #0DBC79;
+  outline-offset: 2px;
+}
+
+/* Custom Glow Effect for Primary Actions */
+.primary-glow {
+  box-shadow: 0 0 20px rgba(13, 188, 121, 0.3);
+}
+
+/* Backdrop styling for dialogs */
+.MuiBackdrop-root {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Custom selection styling */
+::selection {
+  background-color: #0DBC79;
+  color: #000000;
+}
+
+::-moz-selection {
+  background-color: #0DBC79;
+  color: #000000;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Installation progress styling */
+.install-progress {
+  background-color: #2D2D2D;
+  border: 1px solid #404040;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #D4D4D4;
+}
+
+/* Stepper customization */
+.MuiStepIcon-root.Mui-active {
+  color: #0DBC79 !important;
+}
+
+.MuiStepIcon-root.Mui-completed {
+  color: #0DBC79 !important;
+}
+
+/* Tab styling */
+.MuiTabs-root {
+  border-bottom: 1px solid #404040;
+}
+
+/* Enhanced card styling */
+.setup-card, .settings-card {
+  background: linear-gradient(135deg, #2D2D2D 0%, #252525 100%);
+  border: 1px solid #404040;
+  border-radius: 12px;
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
