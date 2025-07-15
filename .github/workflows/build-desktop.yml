@@ -64,7 +64,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: macos-app
-        path: frontend/dist/*.dmg
+        path: |
+          frontend/dist/*.dmg
+          frontend/dist/*-mac.zip
         
     - name: Upload Linux artifacts
       if: matrix.os == 'ubuntu-latest'
@@ -79,6 +81,7 @@ jobs:
       with:
         files: |
           frontend/dist/*.dmg
+          frontend/dist/*-mac.zip
           frontend/dist/*.AppImage
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

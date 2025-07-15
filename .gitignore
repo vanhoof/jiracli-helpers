@@ -294,6 +294,9 @@ dist
 .cache/
 public
 
+# Override: Don't ignore React public directory
+!frontend/public/
+
 # Storybook build outputs
 .out
 .storybook-out
