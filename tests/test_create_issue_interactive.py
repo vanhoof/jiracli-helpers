@@ -152,12 +152,12 @@ class TestConfigManagement:
     def test_get_config_dir(self):
         """Test getting config directory"""
         config_dir = get_config_dir()
-        assert config_dir.endswith("/.local/share/jcli-interactive")
+        assert config_dir.endswith("/.local/share/jiracli-helpers")
 
     def test_get_jcli_path_file(self):
         """Test getting jcli path file"""
         path_file = get_jcli_path_file()
-        assert path_file.endswith("/.local/share/jcli-interactive/jcli_path")
+        assert path_file.endswith("/.local/share/jiracli-helpers/jcli_path")
 
     def test_save_and_load_jcli_path(self):
         """Test saving and loading jcli path"""
