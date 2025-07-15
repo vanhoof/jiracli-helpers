@@ -38,7 +38,7 @@ const theme = createTheme({
       dark: '#1F93AF',
     },
     success: {
-      main: '#0DBC79',      // Green (matches primary)
+      main: '#0DBC79',      // Green (matches primary text)
       light: '#23D18B',
       dark: '#0A9B63',
     },
