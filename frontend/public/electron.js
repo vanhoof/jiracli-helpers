@@ -17,7 +17,9 @@ function createWindow() {
       enableRemoteModule: false,
       preload: path.join(__dirname, 'preload.js')
     },
-    icon: path.join(__dirname, 'icon.png'), // Add icon later
+    icon: isDev 
+      ? path.join(__dirname, process.platform === 'darwin' ? 'CherryIcon.icns' : 'CherryIcon.png')
+      : path.join(__dirname, process.platform === 'darwin' ? 'CherryIcon.icns' : 'CherryIcon.png'),
     titleBarStyle: 'default',
     show: false
   });
