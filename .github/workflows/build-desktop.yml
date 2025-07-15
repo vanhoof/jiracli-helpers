@@ -73,10 +73,34 @@ jobs:
         name: linux-app
         path: frontend/dist/*.AppImage
         
-    - name: Release assets
+    - name: Release assets (Tagged Release)
       if: github.event_name == 'release'
       uses: softprops/action-gh-release@v1
       with:
+        files: |
+          frontend/dist/*.dmg
+          frontend/dist/*-mac.zip
+          frontend/dist/*.AppImage
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Update Latest Pre-release
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: softprops/action-gh-release@v1
+      with:
+        name: Latest Development Build
+        tag_name: latest
+        prerelease: true
+        body: |
+          **⚠️ Development Build**
+          
+          This is an automatically generated build from the latest main branch.
+          It may contain bugs or incomplete features.
+          
+          **Commit:** ${{ github.sha }}
+          **Date:** ${{ github.event.head_commit.timestamp }}
+          
+          For stable releases, see the [Releases page](https://github.com/${{ github.repository }}/releases).
         files: |
           frontend/dist/*.dmg
           frontend/dist/*-mac.zip
