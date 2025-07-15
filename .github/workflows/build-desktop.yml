@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
     
     strategy:
       matrix:
@@ -84,8 +86,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-    - name: Update Latest Pre-release
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    - name: Update Latest Pre-release (macOS)
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'macos-latest'
       uses: softprops/action-gh-release@v1
       with:
         name: Latest Development Build
@@ -104,6 +106,27 @@ jobs:
         files: |
           frontend/dist/*.dmg
           frontend/dist/*-mac.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Update Latest Pre-release (Linux)
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.os == 'ubuntu-latest'
+      uses: softprops/action-gh-release@v1
+      with:
+        name: Latest Development Build
+        tag_name: latest
+        prerelease: true
+        body: |
+          **⚠️ Development Build**
+          
+          This is an automatically generated build from the latest main branch.
+          It may contain bugs or incomplete features.
+          
+          **Commit:** ${{ github.sha }}
+          **Date:** ${{ github.event.head_commit.timestamp }}
+          
+          For stable releases, see the [Releases page](https://github.com/${{ github.repository }}/releases).
+        files: |
           frontend/dist/*.AppImage
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
