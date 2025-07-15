@@ -366,7 +366,7 @@ ${useToken ? `token: ${jiraConfig.token}` : `password: ${jiraConfig.password}`}`
   return (
     <Paper elevation={3} className="setup-card" sx={{ p: 4 }}>
       <Typography variant="h5" gutterBottom align="center" sx={{ color: '#FFFFFF', mb: 3 }}>
-        🚀 Setup Wizard
+        🌸 Setup Wizard
       </Typography>
       
       <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
