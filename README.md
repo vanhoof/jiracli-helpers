@@ -188,6 +188,35 @@ Clear saved jcli path:
 python create_issue_interactive.py --clear-path
 ```
 
+## Desktop GUI Application
+
+A cross-platform desktop application is available in the `frontend/` directory, built with Electron and React.
+
+### Features:
+- **Setup Wizard**: Guided installation of jiracli and JIRA configuration
+- **Script Runner**: Execute scripts with real-time output and interaction
+- **Cross-platform**: Runs on macOS and Linux
+- **Auto-packaging**: Automated builds for distribution
+
+### Quick Start:
+```bash
+./start
+```
+
+**Manual Setup:**
+```bash
+cd frontend
+npm install
+npm run electron-dev
+```
+
+### Distribution:
+Pre-built applications are automatically generated for releases:
+- **macOS**: `.dmg` installer
+- **Linux**: `.AppImage` portable executable
+
+See [frontend/README.md](frontend/README.md) for detailed documentation.
+
 ## Future Scripts
 
 This repository will expand to include additional JIRA helper scripts:
