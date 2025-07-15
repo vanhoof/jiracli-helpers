@@ -10,7 +10,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   // jiracli installation
   installJiracli: (forceReinstall = false) => ipcRenderer.invoke('install-jiracli', forceReinstall),
-  updateJiracli: () => ipcRenderer.invoke('install-jiracli', true), // Force reinstall for updates
+  updateJiracli: (updateMethod = 'pull') => ipcRenderer.invoke('update-jiracli', updateMethod),
   onInstallProgress: (callback) => ipcRenderer.on('install-progress', callback),
   removeInstallProgressListener: (callback) => ipcRenderer.removeListener('install-progress', callback),
   

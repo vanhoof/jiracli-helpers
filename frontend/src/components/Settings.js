@@ -13,7 +13,8 @@ import {
   Link,
   Grid,
   Divider,
-  CircularProgress
+  CircularProgress,
+  ButtonGroup
 } from '@mui/material';
 import {
   ExpandMore,
@@ -21,14 +22,44 @@ import {
   OpenInNew,
   Computer,
   CloudDownload,
-  Settings as SettingsIcon
+  Settings as SettingsIcon,
+  Update,
+  Refresh as FreshIcon
 } from '@mui/icons-material';
+import Convert from 'ansi-to-html';
+
+// Create ANSI to HTML converter with terminal-like styling
+const convert = new Convert({
+  fg: '#D4D4D4',        // Default foreground (light gray)
+  bg: '#1E1E1E',        // Default background (dark)
+  newline: true,        // Convert newlines to <br>
+  escapeXML: true,      // Escape HTML entities
+  colors: {
+    0: '#000000',       // Black
+    1: '#CD3131',       // Red
+    2: '#f36196',       // Pink  
+    3: '#E5E510',       // Yellow
+    4: '#2472C8',       // Blue
+    5: '#BC3FBC',       // Magenta
+    6: '#11A8CD',       // Cyan
+    7: '#E5E5E5',       // White
+    8: '#666666',       // Bright Black (Gray)
+    9: '#F14C4C',       // Bright Red
+    10: '#f36196',      // Bright Pink
+    11: '#F5F543',      // Bright Yellow
+    12: '#3B8EEA',      // Bright Blue
+    13: '#D670D6',      // Bright Magenta
+    14: '#29B8DB',      // Bright Cyan
+    15: '#E5E5E5'       // Bright White
+  }
+});
 
 function Settings({ systemStatus, onStatusChange }) {
   const [jiraConfig, setJiraConfig] = useState('');
   const [configLoaded, setConfigLoaded] = useState(false);
   const [saveStatus, setSaveStatus] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [updateMethod, setUpdateMethod] = useState(null);
   const [updateOutput, setUpdateOutput] = useState('');
   const [updateStatus, setUpdateStatus] = useState(null);
 
@@ -81,13 +112,14 @@ function Settings({ systemStatus, onStatusChange }) {
     onStatusChange();
   };
 
-  const handleUpdateJiracli = async () => {
+  const handleUpdateJiracli = async (method = 'pull') => {
     setIsUpdating(true);
+    setUpdateMethod(method);
     setUpdateOutput('');
     setUpdateStatus(null);
 
     try {
-      const result = await window.electronAPI.updateJiracli();
+      const result = await window.electronAPI.updateJiracli(method);
       if (result.success) {
         setUpdateStatus({ type: 'success', message: 'jiracli updated successfully!' });
         onStatusChange(); // Refresh system status
@@ -98,10 +130,16 @@ function Settings({ systemStatus, onStatusChange }) {
       setUpdateStatus({ type: 'error', message: `Update error: ${error.message}` });
     } finally {
       setIsUpdating(false);
+      setUpdateMethod(null);
     }
 
     // Clear status after 5 seconds
     setTimeout(() => setUpdateStatus(null), 5000);
+  };
+
+  // Convert ANSI codes to HTML
+  const convertAnsiToHtml = (text) => {
+    return convert.toHtml(text);
   };
 
   const getStatusColor = (status) => {
@@ -209,17 +247,27 @@ function Settings({ systemStatus, onStatusChange }) {
           </Typography>
           
           <Box sx={{ mt: 2, mb: 2 }}>
-            <Button
-              variant="contained"
-              onClick={handleUpdateJiracli}
-              disabled={isUpdating}
-              startIcon={isUpdating ? <CircularProgress size={20} /> : <CloudDownload />}
-              color="primary"
-              size="large"
-            >
-              {isUpdating ? 'Updating jiracli...' : 'Update to Latest Version'}
-            </Button>
+            <ButtonGroup variant="contained" disabled={isUpdating} size="large">
+              <Button
+                onClick={() => handleUpdateJiracli('pull')}
+                startIcon={isUpdating && updateMethod === 'pull' ? <CircularProgress size={20} /> : <Update />}
+                color="primary"
+              >
+                {isUpdating && updateMethod === 'pull' ? 'Updating...' : 'Update (Git Pull)'}
+              </Button>
+              <Button
+                onClick={() => handleUpdateJiracli('fresh')}
+                startIcon={isUpdating && updateMethod === 'fresh' ? <CircularProgress size={20} /> : <FreshIcon />}
+                color="warning"
+              >
+                {isUpdating && updateMethod === 'fresh' ? 'Installing...' : 'Fresh Install'}
+              </Button>
+            </ButtonGroup>
           </Box>
+          
+          <Typography variant="body2" color="text.secondary" sx={{ mt: 1, mb: 2 }}>
+            <strong>Git Pull:</strong> Updates while preserving local changes (recommended) • <strong>Fresh Install:</strong> Complete clean reinstall (use if pull fails)
+          </Typography>
 
           {updateStatus && (
             <Alert severity={updateStatus.type} sx={{ mt: 2 }}>
@@ -228,11 +276,26 @@ function Settings({ systemStatus, onStatusChange }) {
           )}
 
           {(isUpdating || updateOutput) && (
-            <Box className="install-progress" sx={{ mt: 3, p: 2, maxHeight: 200, overflow: 'auto' }}>
-              <Typography variant="body2" component="pre" sx={{ fontFamily: 'monospace', fontSize: '0.75rem', whiteSpace: 'pre-wrap', color: '#D4D4D4' }}>
-                {updateOutput || 'Starting update process...'}
-              </Typography>
-            </Box>
+            <Box
+              className="terminal-output"
+              sx={{ 
+                mt: 3,
+                fontFamily: 'monospace',
+                fontSize: '14px',
+                lineHeight: 1.4,
+                backgroundColor: '#1E1E1E',
+                color: '#D4D4D4',
+                padding: 2,
+                borderRadius: 1,
+                overflow: 'auto',
+                maxHeight: 300,
+                border: '1px solid #404040',
+                whiteSpace: 'pre-wrap'
+              }}
+              dangerouslySetInnerHTML={{
+                __html: updateOutput ? convertAnsiToHtml(updateOutput) : '<span style="color: #666666;">Starting update process...</span>'
+              }}
+            />
           )}
 
           <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
