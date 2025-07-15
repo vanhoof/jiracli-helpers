@@ -86,7 +86,7 @@ body {
 }
 
 .status-success {
-  color: #0DBC79;
+  color: #f36196;
 }
 
 .status-error {
@@ -103,13 +103,13 @@ body {
 
 /* Enhanced Focus States */
 .MuiButton-root:focus {
-  outline: 2px solid #0DBC79;
+  outline: 2px solid #f36196;
   outline-offset: 2px;
 }
 
 /* Custom Glow Effect for Primary Actions */
 .primary-glow {
-  box-shadow: 0 0 20px rgba(13, 188, 121, 0.3);
+  box-shadow: 0 0 20px rgba(243, 97, 150, 0.3);
 }
 
 /* Backdrop styling for dialogs */
@@ -119,12 +119,12 @@ body {
 
 /* Custom selection styling */
 ::selection {
-  background-color: #0DBC79;
+  background-color: #f36196;
   color: #000000;
 }
 
 ::-moz-selection {
-  background-color: #0DBC79;
+  background-color: #f36196;
   color: #000000;
 }
 
@@ -159,11 +159,11 @@ body {
 
 /* Stepper customization */
 .MuiStepIcon-root.Mui-active {
-  color: #0DBC79 !important;
+  color: #f36196 !important;
 }
 
 .MuiStepIcon-root.Mui-completed {
-  color: #0DBC79 !important;
+  color: #f36196 !important;
 }
 
 /* Tab styling */

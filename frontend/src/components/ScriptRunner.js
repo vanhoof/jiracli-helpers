@@ -35,7 +35,7 @@ const convert = new Convert({
   colors: {
     0: '#000000',       // Black
     1: '#CD3131',       // Red
-    2: '#0DBC79',       // Green  
+    2: '#f36196',       // Pink  
     3: '#E5E510',       // Yellow
     4: '#2472C8',       // Blue
     5: '#BC3FBC',       // Magenta
@@ -43,7 +43,7 @@ const convert = new Convert({
     7: '#E5E5E5',       // White
     8: '#666666',       // Bright Black (Gray)
     9: '#F14C4C',       // Bright Red
-    10: '#23D18B',      // Bright Green
+    10: '#f36196',      // Bright Pink
     11: '#F5F543',      // Bright Yellow
     12: '#3B8EEA',      // Bright Blue
     13: '#D670D6',      // Bright Magenta
@@ -288,7 +288,7 @@ function ScriptRunner({ systemStatus }) {
                       borderColor: '#777777'
                     },
                     '&.Mui-focused fieldset': {
-                      borderColor: '#0DBC79'
+                      borderColor: '#f36196'
                     }
                   }
                 }}

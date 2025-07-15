@@ -10,9 +10,9 @@ const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#0DBC79',      // Green accent (matches terminal success color)
-      light: '#23D18B',
-      dark: '#0A9B63',
+      main: '#f36196',      // Pink accent (matches cherry icon theme)
+      light: '#f582ab',
+      dark: '#d4407a',
       contrastText: '#ffffff',
     },
     secondary: {
@@ -38,9 +38,9 @@ const theme = createTheme({
       dark: '#1F93AF',
     },
     success: {
-      main: '#0DBC79',      // Green (matches primary text)
-      light: '#23D18B',
-      dark: '#0A9B63',
+      main: '#f36196',      // Pink (matches primary text)
+      light: '#f582ab',
+      dark: '#d4407a',
     },
     background: {
       default: '#1E1E1E',   // Dark background (matches terminal)
@@ -83,8 +83,8 @@ const theme = createTheme({
           borderRadius: 12,
           border: '1px solid #404040',
           '&:hover': {
-            borderColor: '#0DBC79',
-            boxShadow: '0 4px 20px rgba(13, 188, 121, 0.15)',
+            borderColor: '#f36196',
+            boxShadow: '0 4px 20px rgba(243, 97, 150, 0.15)',
           },
         },
       },
@@ -111,7 +111,7 @@ const theme = createTheme({
           fontWeight: 600,
           fontSize: '1rem',
           '&.Mui-selected': {
-            color: '#0DBC79',
+            color: '#f36196',
           },
         },
       },
@@ -119,7 +119,7 @@ const theme = createTheme({
     MuiTabs: {
       styleOverrides: {
         indicator: {
-          backgroundColor: '#0DBC79',
+          backgroundColor: '#f36196',
           height: 3,
           borderRadius: '3px 3px 0 0',
         },
@@ -144,7 +144,7 @@ const theme = createTheme({
               borderColor: '#606060',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#0DBC79',
+              borderColor: '#f36196',
             },
           },
         },
@@ -168,11 +168,11 @@ const theme = createTheme({
       styleOverrides: {
         label: {
           '&.Mui-active': {
-            color: '#0DBC79',
+            color: '#f36196',
             fontWeight: 600,
           },
           '&.Mui-completed': {
-            color: '#0DBC79',
+            color: '#f36196',
           },
         },
       },
